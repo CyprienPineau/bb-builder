@@ -1,11 +1,25 @@
 import Link from "next/link"
 import styles from '../styles/TeamBuilder.module.css'
-import BB_TEAM_DATA from './../data/team'
 import {useRouter} from 'next/router'
+import { useEffect, useRef } from "react"
 
-function HirePlayer({TeamData}){
-    
-    const playerList = TeamData.players.map((player,index)=>{
+
+function HirePlayer({players = []}){
+
+    useEffect(() => {
+        console.log('players changed');
+    }, [players])
+
+    const isFirstRun = useRef(true);
+    useEffect (() => {
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+            return;
+        }
+        console.log('players changed 2');
+    }, [players]);
+
+    let playerList = players.map((player,index)=>{
         return <div className={styles.hire} key={index}>
             <a href="">
                 <img src="/icons/minus.svg" alt="remove"/>
@@ -24,21 +38,17 @@ function HirePlayer({TeamData}){
     </div>
 }
 
-
-export default function TeamBuilder (){
+export default function TeamBuilder ({fetchTeam}){
     const router = useRouter()
     let TeamData = [];
     
     // Récupération des joueurs de l'equipe selectionne
-    BB_TEAM_DATA.map((team, index)=>{
+    fetchTeam.map((team)=>{
         if(team.name == router.query.team){
             TeamData = team;
+            console.log(TeamData)
         }
     })
-
-    
-
-
 
     return <main className={styles.main}>
 
@@ -48,7 +58,17 @@ export default function TeamBuilder (){
 
         <h2>{TeamData.name}</h2>
 
-        <HirePlayer TeamData={TeamData}/>
+        <HirePlayer TeamData={TeamData.players}/>
 
     </main>
+}
+
+export async function getStaticProps (){
+    const fetchTeam = await fetch("https://cyprienpineau.github.io/data-bb-builder/teams.json")
+    .then(r=>r.json())
+    return {
+        props:{
+            fetchTeam
+        }
+    }
 }

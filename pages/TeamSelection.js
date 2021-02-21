@@ -1,11 +1,9 @@
 import Link from "next/link"
 import styles from '../styles/TeamSelection.module.css'
-import BB_TEAM_DATA from './../data/team'
 
-
-export default function TeamSelection (){
-
-    const teamList = BB_TEAM_DATA.map((team, index)=>{
+export default function TeamSelection ({teams_data}){
+    
+    const teamList = teams_data.map((team, index)=>{
         return <Link href={{pathname:'/TeamBuilder', query:{team:team.name}}} key={index}>
             <a>
                 <img src={team.img} alt={team.name + " team logo"}/>
@@ -27,4 +25,14 @@ export default function TeamSelection (){
 
         {teamList}
     </main>
+}
+
+export async function getStaticProps (){
+    const teams_data = await fetch("https://cyprienpineau.github.io/data-bb-builder/teams.json")
+    .then(r=>r.json())
+    return {
+        props:{
+            teams_data
+        }
+    }
 }
