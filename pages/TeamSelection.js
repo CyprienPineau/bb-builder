@@ -1,16 +1,22 @@
 import Link from "next/link"
 import styles from '../styles/TeamSelection.module.css'
 
-export default function TeamSelection ({teams_data}){
+export default function TeamSelection ({AllTeamsData}){
     
-    const teamList = teams_data.map((team, index)=>{
+    const teamList = AllTeamsData.map((team, index)=>{
         return <Link href={{pathname:'/TeamBuilder', query:{team:team.name}}} key={index}>
-            <a>
-                <img src={team.img} alt={team.name + " team logo"}/>
-
-                <div>
-                    {team.name}
+            <a className={styles.teamcontainer}>
+                <div className={styles.imgcontainer}>
+                    <img 
+                        className={styles.img}
+                        src={team.img}
+                        alt={team.name + " team logo"}
+                    />
                 </div>
+
+                <p className={styles.teamname}>
+                    {team.name}
+                </p>
             </a>
         </Link>
     })
@@ -18,21 +24,23 @@ export default function TeamSelection ({teams_data}){
     return <main className={styles.main}>
 
         <Link href="/">
-            <a>Go back</a>
+            <a className={styles.backHome}>| Return Home</a>
         </Link>
 
-        <h2>Team Selection</h2>
+        <h2 className={styles.title} >Team Selection</h2>
 
-        {teamList}
+        <div className={styles.teamList}>
+            {teamList}
+        </div>
     </main>
 }
 
 export async function getStaticProps (){
-    const teams_data = await fetch("https://cyprienpineau.github.io/data-bb-builder/teams.json")
+    const AllTeamsData = await fetch("https://cyprienpineau.github.io/data-bb-builder/teams.json")
     .then(r=>r.json())
     return {
         props:{
-            teams_data
+            AllTeamsData
         }
     }
 }

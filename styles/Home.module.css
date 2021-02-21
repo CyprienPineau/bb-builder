@@ -9,6 +9,31 @@
   background-color: #EFEDE7;
 }
 
+.title {
+  font-size: 100px;
+  margin-bottom: 20px;
+}
+
+.createTeam {
+  background-color: #B3110F;
+  padding: 10px 50px;
+  border-radius: 100px;
+  color: white;
+  font-weight: bold;
+  border: 3px solid #B3110F;
+  /* box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.363); */
+}
+.createTeam:hover{
+  background-color: #EFEDE7;
+  color: #B3110F;
+  transition: 0.3s;
+}
+.createTeam:active{
+  background-color: #B3110F;
+  color: #EFEDE7;
+  transition: 0.3s;
+}
 
 @media (max-width: 600px) {
 }
+

@@ -16,7 +16,7 @@ export default function Home() {
           <h1  className={styles.title}>BB Builder</h1>
 
           <Link href="/TeamSelection">
-            <a>Build your team</a>
+            <a className={styles.createTeam}>Build your team</a>
           </Link>
 
       </main>
