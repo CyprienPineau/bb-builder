@@ -24,13 +24,12 @@ const styles = StyleSheet.create({
   allplayershired:{
     display:'flex',
     flexDirection: 'column',
-    gap:'20pt',
   },
   playerhired:{
     backgroundColor: '#E4E4E4',
     display:'flex',
     flexDirection: 'row',
-    gap:'18pt',
+    padding:'18pt',
   },
   quantity:{
     width : '30pt',
@@ -53,7 +52,7 @@ const MyDocument = ({teamName='', teamValue=0, players=[],hiredPLayersByType=[]}
     <Page size="A4" orientation='landscape' style={styles.page}> 
       <View style={styles.header}>
         <Text style={styles.title}>{teamName} Team</Text>
-        <Text style={styles.teamvalue}>{teamValue + ' 000 ¤'} </Text>
+        <Text style={styles.teamvalue}>{"Team Value : " + teamValue * 1000 +" ¤"}</Text>
       </View>
       <View style={styles.allplayershired}>
         {
@@ -61,7 +60,7 @@ const MyDocument = ({teamName='', teamValue=0, players=[],hiredPLayersByType=[]}
             return <View style={styles.playerhired} key={index}>
               <Text style={styles.quantity}>{hiredPLayersByType[index]}</Text>
               <Text style={styles.playertype}>{player.name}</Text>
-              <Text style={styles.cost}>{player.cost} 000 $</Text>
+              <Text style={styles.cost}>{player.cost + " 000 ¤"}</Text>
             </View>
           })
         }
