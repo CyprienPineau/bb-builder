@@ -1,0 +1,20 @@
+.download{
+    cursor: pointer;
+    background-color: #B3110F;
+    border: 3px solid #B3110F;
+    padding : 10px 20px;
+    border-radius: 100px;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.download:hover{
+    background-color: #EFEDE7;
+    color: #B3110F;
+    transition: 0.3s;
+}
+.download:active{
+    background-color: #B3110F;
+    color: white;
+    transition: 0.3s;
+}

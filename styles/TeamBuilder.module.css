@@ -20,27 +20,6 @@
 .teamcost{
     font-size: 20px;
 }
-.download{
-    margin-bottom: 40px;
-    cursor: pointer;
-    background-color: #B3110F;
-    border: 3px solid #B3110F;
-    padding : 10px 20px;
-    border-radius: 100px;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.download:hover{
-    background-color: #EFEDE7;
-    color: #B3110F;
-    transition: 0.3s;
-}
-.download:active{
-    background-color: #B3110F;
-    color: white;
-    transition: 0.3s;
-}
 .backHome{
     position: absolute;
     top: 0;
@@ -49,6 +28,7 @@
     padding: 10px 20px;
     border-bottom-right-radius: 20px;
     font-weight: 600;
+    font-size: 20px;
 }
 .backHome:hover{
     font-weight: bold;
@@ -61,6 +41,8 @@
     flex-direction: column;
     gap: 10px;
     width:60%;
+    margin-bottom: 40px;
+    margin-top: 40px;
 }
 .playerToHire{
     display: flex;

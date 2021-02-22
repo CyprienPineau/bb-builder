@@ -1,11 +1,16 @@
 import Link from "next/link"
 import styles from '../styles/TeamBuilder.module.css'
 import {useRouter} from 'next/router'
+
+import React from 'react';
 import { useEffect, useState } from "react"
 
-function HirePlayer({players=[],HiredPlayersCount,AddPlayer,RemovePlayer}){
+import DownloadPDF from './../components/DownloadPDF'
+import MyDocument from './../components/DocumentPDF';
 
-    const [playerList,setSlayerList] =useState([])
+function HirePlayer({players=[],hiredPLayers,AddPlayer,RemovePlayer}){
+
+    const [playerList,setSlayerList] = useState([])
 
     //on surveille la reception de players
     useEffect(() => {
@@ -14,7 +19,7 @@ function HirePlayer({players=[],HiredPlayersCount,AddPlayer,RemovePlayer}){
                 return <div className={styles.playerToHire} key={index}>
                     <a 
                         className={styles.minus}
-                        onClick={()=>RemovePlayer(player.name)}
+                        onClick={()=>RemovePlayer(index)}
                     >
                         <div className={styles.imgcontainer}>
                             <svg className={styles.img} width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,8 +29,7 @@ function HirePlayer({players=[],HiredPlayersCount,AddPlayer,RemovePlayer}){
                     </a>
                     <a 
                         className={styles.plus}
-                        id={player.name}
-                        onClick={()=>AddPlayer(player.name)}
+                        onClick={()=>AddPlayer(index)}
                     >   
                         <div className={styles.imgcontainer}>
                             <svg className={styles.img} width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,10 +37,9 @@ function HirePlayer({players=[],HiredPlayersCount,AddPlayer,RemovePlayer}){
                             </svg>
                         </div>
                     </a>
-                    <div className={styles.playerquantity}>0</div> 
-                    {/* {HiredPlayersCount[player.name]} */}
+                    <div className={styles.playerquantity}>{hiredPLayers[index]}</div> 
                     <div className={styles.playername}>{player.name}</div>
-                    <div className={styles.playercost}>{player.cost + " 000 $"}</div>
+                    <div className={styles.playercost}>{player.cost + " 000 ¤"}</div>
                     <div className={styles.maxplayers} >{"Max. " + player.max}</div>
                 </div>
             }))
@@ -48,12 +51,13 @@ function HirePlayer({players=[],HiredPlayersCount,AddPlayer,RemovePlayer}){
     </div>
 }
 
-
 export default function TeamBuilder ({AllTeamsData}){
     const router = useRouter()
     let TeamData = [];
-    let HiredPlayersCount = []
-    const [hiredPLayers,setHiredPLayers] = useState([])
+    let HiredPlayersCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    const [hiredPLayers,setHiredPLayers] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+
+    const [teamValue,setTeamValue] = useState(0)
 
     // Récupération des joueurs de l'equipe selectionne
     AllTeamsData.map((team)=>{
@@ -61,25 +65,58 @@ export default function TeamBuilder ({AllTeamsData}){
             TeamData = team;
             
             // Initialisation du nombre de joueur dans l'equipe de chaque type
+            // TeamData.players.map((player,index)=>{
+            //     HiredPlayersCount.push(0)
+            // })
+            // setTeamValue([...HiredPlayersCount])
+
+            // console.log("INIT")
+            // console.log("HiredPlayersCount")
+            // console.log(HiredPlayersCount)
+            // console.log("hiredPLayers")
+            // console.log(hiredPLayers)
+
             TeamData.players.map((player,index)=>{
-                HiredPlayersCount[player.name] = 0
+                
             })
-            console.log(hiredPLayers)
         }
     })
 
-    const AddPlayer = (playerName)=>{
-        console.log("add " + playerName)
-        HiredPlayersCount[playerName]++
-        console.log("playerName nb : " + HiredPlayersCount[playerName])
-        setHiredPLayers(hiredPLayers)
+    const calculateTeamValue = () =>{
+        let teamValue_temp = 0
+        TeamData.players.map((player,index)=>{
+            teamValue_temp = teamValue_temp + HiredPlayersCount[index] * player.cost;
+        })
+        setTeamValue(teamValue_temp);
     }
-    const RemovePlayer = (playerName)=>{
-        console.log("remove " + playerName)
-        HiredPlayersCount[playerName]--
-        console.log("playerName nb : " + HiredPlayersCount[playerName])
-        setHiredPLayers(HiredPlayersCount)
+
+    const AddPlayer = (playerId)=>{
+        HiredPlayersCount = hiredPLayers;
+        HiredPlayersCount[playerId]++
+        console.log("playerName nb : " + HiredPlayersCount[playerId])
+
+        setHiredPLayers([...HiredPlayersCount])
+
+        console.log("ADD --------------")
+        console.log("HiredPlayersCount")
+        console.log(HiredPlayersCount)
+        console.log("hiredPLayers")
         console.log(hiredPLayers)
+        
+        calculateTeamValue()
+    }
+    const RemovePlayer = (playerId)=>{
+        HiredPlayersCount[playerId]--
+        console.log("playerName nb : " + HiredPlayersCount[playerId])
+        
+        setHiredPLayers([HiredPlayersCount])
+
+        // console.log("HiredPlayersCount")
+        // console.log(HiredPlayersCount)
+        console.log("hiredPLayers")
+        console.log(hiredPLayers)
+
+        calculateTeamValue()
     }
 
     return <main className={styles.main}>
@@ -91,14 +128,25 @@ export default function TeamBuilder ({AllTeamsData}){
         <div className={styles.titlecontainer}>
             <img src={TeamData.img} alt={TeamData.name + "'s Logo"}/>
             <h2 className={styles.title}>{TeamData.name}</h2>
-            <p className={styles.teamcost}>1 200 000 $</p>
+            <p className={styles.teamcost}>{"Team Value : " + teamValue * 1000 +" ¤"}</p>
         </div>
 
-        <div className={styles.download}> Download Team </div>
+        <div className={styles.title}>{hiredPLayers[0]}</div>
+
+        <DownloadPDF 
+            document={
+                <MyDocument 
+                    // teamValue={teamValue}
+                    // teamName={TeamData.name}
+                    // players={TeamData.players} 
+                    // hiredPlayers={HiredPlayersCount}
+                />
+            }
+        />
 
         <HirePlayer 
             players={TeamData.players}
-            HiredPlayersCount = {hiredPLayers}
+            hiredPLayers = {hiredPLayers}
             AddPlayer = {AddPlayer}
             RemovePlayer = {RemovePlayer}
         />

@@ -20,6 +20,7 @@
     padding: 10px 20px;
     border-bottom-right-radius: 20px;
     font-weight: 600;
+    font-size: 20px;
 }
 .backHome:hover{
     font-weight: bold;
