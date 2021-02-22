@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import styles from './DownloadPDF.module.css'
 
 
-const DownloadPDF = ({document}) => {
+const DownloadPDF = ({document,title="bbteam"}) => {
     const [isClient, setIsClient] = useState(false)
   
     useEffect(() => {
@@ -13,7 +13,7 @@ const DownloadPDF = ({document}) => {
     return (
         <>
             {isClient && (
-            <PDFDownloadLink document={document} fileName="resume.pdf">
+            <PDFDownloadLink document={document} fileName={"bbteam" + title}>
                 {({ blob, url, loading, error }) => (loading ? 
                     'Loading document...' 
                     : 

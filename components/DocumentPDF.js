@@ -48,10 +48,9 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const MyDocument = ({teamName, teamValue, players=[],hiredPlayers}) => (
+const MyDocument = ({teamName='', teamValue=0, players=[],hiredPLayersByType=[]}) => (
   <Document>
     <Page size="A4" orientation='landscape' style={styles.page}> 
-    {/* orientation='landscape' wrap={false}  */}
       <View style={styles.header}>
         <Text style={styles.title}>{teamName} Team</Text>
         <Text style={styles.teamvalue}>{teamValue + ' 000 ¤'} </Text>
@@ -60,7 +59,7 @@ const MyDocument = ({teamName, teamValue, players=[],hiredPlayers}) => (
         {
           players.map((player,index)=>{
             return <View style={styles.playerhired} key={index}>
-              <Text style={styles.quantity}>{hiredPlayers[player.name]}</Text>
+              <Text style={styles.quantity}>{hiredPLayersByType[index]}</Text>
               <Text style={styles.playertype}>{player.name}</Text>
               <Text style={styles.cost}>{player.cost} 000 $</Text>
             </View>
