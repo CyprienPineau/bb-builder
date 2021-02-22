@@ -34,7 +34,7 @@ export default function TeamBuilder ({AllTeamsData}){
         hiredPLayersByType.map((nbPlayer,index)=>{
             playerCount = playerCount + nbPlayer
         })
-        console.log("Il y a : "+ playerCount)
+
         setNbPlayer(playerCount);
     }
 
@@ -43,13 +43,8 @@ export default function TeamBuilder ({AllTeamsData}){
             if (hiredPLayersByType[playerId] != TeamData.players[playerId].max){
                 let hiredPLayersByType_temp = hiredPLayersByType;
                 hiredPLayersByType_temp[playerId]++
-                console.log("playerName nb : " + hiredPLayersByType_temp[playerId])
-        
+
                 setHiredPLayersByType([...hiredPLayersByType_temp])
-        
-                console.log("ADD --------------")
-                console.log("hiredPLayersByType")
-                console.log(hiredPLayersByType)
                 
                 calculateTeamValue()
                 calculateNbPlayer()
@@ -62,12 +57,7 @@ export default function TeamBuilder ({AllTeamsData}){
             let hiredPLayersByType_temp = hiredPLayersByType;
             hiredPLayersByType_temp[playerId]--
 
-            console.log("playerName nb : " + hiredPLayersByType_temp[playerId])
-            
             setHiredPLayersByType([...hiredPLayersByType_temp])
-
-            console.log("hiredPLayersByType")
-            console.log(hiredPLayersByType)
 
             calculateTeamValue()
             calculateNbPlayer()
