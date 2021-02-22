@@ -54,7 +54,7 @@ const MyDocument = ({teamName, teamValue, players=[],hiredPlayers}) => (
     {/* orientation='landscape' wrap={false}  */}
       <View style={styles.header}>
         <Text style={styles.title}>{teamName} Team</Text>
-        <Text style={styles.teamvalue}>{teamValue + '000 $'} </Text>
+        <Text style={styles.teamvalue}>{teamValue + ' 000 ¤'} </Text>
       </View>
       <View style={styles.allplayershired}>
         {
