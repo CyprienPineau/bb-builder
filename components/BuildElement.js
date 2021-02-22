@@ -1,7 +1,7 @@
 import styles from './BuildElement.module.css'
 
 
-export default function BuildElement({id,title,cost,quantity,max,Add,Remove,isAddAnaible}){
+export default function BuildElement({id=0,title,cost,quantity,max,Add,Remove,isAddAnaible}){
     return <div className={styles.buildelement}>
         { quantity != 0 && <a 
                 className={styles.minus}
