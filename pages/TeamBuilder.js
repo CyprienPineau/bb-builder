@@ -121,7 +121,12 @@ export default function TeamBuilder ({AllTeamsData}){
             <p className={styles.teamcost}>{"Team Value : " + teamValue * 1000 +" ¤"}</p>
         </div>
 
-        { nbPlayer == TEAM_MAX_SIZE && <p className={styles.teamfull}>You've reached the maximun team size</p>}
+        { nbPlayer != 0 
+            && <p className={styles.teamnbplayer}>
+                {nbPlayer == 1 ? nbPlayer + " player" : nbPlayer + " players"}
+            </p>
+        }
+        { nbPlayer == TEAM_MAX_SIZE && <p className={styles.teamfull}>Maximun team size reached</p>}
 
         <div className={styles.allPlayerToHire}>
             {playersList}

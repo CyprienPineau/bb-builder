@@ -11,6 +11,7 @@ Elle est actuellement en état d'ébauche permettant d'en saisir les tenants et 
 ## Stack Technique
 
 React Js, Next Js, utilisation d'une API Github en attendant une BDD sous strapi par exemple
+Génération des Pdf avec react-pdf (https://react-pdf.org)
 
 ## BDD
 
