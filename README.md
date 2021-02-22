@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+Cette aplication à pour but de créer des listes d'équipes pour le jeux Blood Bowl conformément aux régles de 2020.
+(https://www.games-workshop.com/fr-FR/Blood-Bowl-Second-Season-Edition-fre-2020)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Cette application a vocation d'être un outil de calcul rapides pour les joueurs amateurs de compétitions en leur fournissant le moyen d'exporter sous pdf leur équipe pour une éventuelle impression.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Elle est actuellement en état ébauche permetant d'en saisir les tenants et aboutissants.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Stack Technique
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+React Js, Next Js, utilisation d'une API Github en attendant une BDD sous strapi par exemple
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## BDD
 
-## Learn More
+Les données sont stockées actuellement sur git, accessible à l'adresse suivante https://cyprienpineau.github.io/data-bb-builder/teams.json
 
-To learn more about Next.js, take a look at the following resources:
+------------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## TODO
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Ajout du Staff d'équipe
+- Ajout de la personalisation ( définir le nom des joueurs, non de l'équipe , charger une image d'équipe pour remplacer celle par défault)
+- Complétion de la BDD avec des donnée de jeu
+- Migration de la BDD sur Strapi par exemple
+- Finalisation de la fiche d'équipe générer pour avoir les details de gameplay
+- possiblilité d'importer/exporter une equipe via un fichier (CSV ?)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
